@@ -18,12 +18,10 @@ file.close()
 print listz[:20]
 
 
-# music.songcomment()
-# musicc.songname()
-# xVals = ['R', '100']
-# # # yVals = [['e','q','t','y','aa','ss','ccc'],[10,20,12,14,23,21,20]]
-# yVals = [musicc.listsong[:30], music.commentaq[:30]]
-# # yVals = [[listy],listx]
-# fig3.title = 'qwe'
-# fig3.ylabel = 'r'
-# fig3.bar(xVals, yVals)
+music.songcomment()
+musicc.songname()
+xVals = ['R', '100']
+yVals = [musicc.listsong[:30], music.commentaq[:30]]
+fig3.title = 'qwe'
+fig3.ylabel = 'r'
+fig3.bar(xVals, yVals)
