@@ -1,7 +1,9 @@
 # neteasefloat
 
 
-
+**03-21更新**  
+加入词云脚本，效果对比：：    
+！[cloud](some.jpg) ![cloud2](songnamecloud.png)
 **03-20更新说明了**  
 需要用到的第三方库  
 @：  
