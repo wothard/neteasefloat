@@ -1,0 +1,76 @@
+
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+    $.getScript( "https://www.gstatic.com/charts/loader.js", function() {
+      if ((typeof google === 'undefined') || (typeof google.visualization === 'undefined'))
+      {
+         google.charts.load('current', {'packages':['corechart']});
+      }
+
+      google.charts.setOnLoadCallback(drawChart_netease_______________);
+    });
+
+    function drawChart_netease_______________() {
+        var dataArr = [['Comment-numbers', 'I Took A Pill In Ibiza (SeeB Remix)', 'Let Her Go (DOAN Remix)', 'Solo Dance', 'All We Know', 'Inside Out', 'Dear Boy (Avicii by Avicii)', 'Say My Name (Kids Want Techno Remix)', 'Vagrant', 'Seve', 'Ellie', 'Shades Of Grey (DFLV Remix)', 'Forgettable', 'Weekend', 'Shine (Matoma Remix)', 'Wake', 'All I See', 'The Ocean (Radio Edit)', 'One Of Us', 'Heaven (Original Mix)', 'Heaven (Kiso Remix)', 'Paris', 'Ghost (Lost Kings Remix)', 'Pretty Young Money', 'Better Place (Raspo Remix)', 'Song For The Rich (Bearson Remix)'], ['Song-name', 13558, 2304, 16472, 18502, 2387, 3034, 1585, 10678, 82963, 6707, 4932, 23449, 3214, 1045, 66513, 1345, 29088, 405, 1221, 2277, 14536, 6349, 102, 79, 524]];
+        var grTitle = 'netease歌曲评论图';
+        var height = 1000;
+        var width = 1000;
+        var logScaleFlag = false;
+        var vAxisTitle = '';
+        var vAxisOpt;
+        if(logScaleFlag)
+        {
+            vAxisOpt = { title: vAxisTitle, logScale: true, format: 'scientific'};
+        }
+        else
+        {
+            vAxisOpt = { title: vAxisTitle };
+        }
+
+        var options = {
+            width: width,
+            height: height,
+            explorer: { actions: ['dragToZoom', 'rightClickToReset'], maxZoomIn: 0.01 },
+            curveType: 'function',
+            title: grTitle,
+            titleTextStyle: { fontSize: 18, bold: true },
+            hAxis: { title: dataArr[0][0] },
+            vAxis: vAxisOpt,
+
+        };
+
+        var data = new google.visualization.DataTable();
+        var csvOut = "data:text/csv;charset=utf-8";
+        // Add column headers
+        data.addColumn('string',dataArr[0][0]);
+        csvOut += ',' + dataArr[0][0];
+        for (var j = 0; j < dataArr[0].length-1; j++)
+        {
+           data.addColumn('number',dataArr[0][j+1]);
+           csvOut += ',' + dataArr[0][j+1];
+        }
+        csvOut += '\n';
+
+        // Add columns
+        for (var i = 1; i < dataArr.length; i++)
+        {
+            data.addRow(dataArr[i]);
+            csvOut += dataArr[i].join(",") + '\n';
+        }
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div_netease_______________'));
+
+        chart.draw(data, options);
+        document.getElementById('pic_div_netease_______________').innerHTML = '<a href="' + chart.getImageURI() + '" download="'+grTitle+'.png">Download Figure</a>'
+        document.getElementById('csvFileDl_netease_______________').innerHTML = '<a href="' + encodeURI(csvOut) + '" download="'+grTitle+'.csv">Download CSV</a>'
+    }
+    </script>
+</head>
+<body>
+    <div id="chart_div_netease_______________"></div>
+    <div id="pic_div_netease_______________"></div>
+    <div id="csvFileDl_netease_______________"></div>
+</body>
+</html>
