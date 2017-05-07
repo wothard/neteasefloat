@@ -9,7 +9,7 @@ import re
 import musicc
 
 def show(some):
-    img = Image.open(r'/home/wothard/neteasefloat/some.png')
+    img = Image.open(r'/home/wothard/neteasefloat/some.jpg')
     iwidth, iheight = img.size
     #创建词云图布局
     wc = wordcloud.WordCloud(
