@@ -4,18 +4,18 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script type="text/javascript">
     $.getScript( "https://www.gstatic.com/charts/loader.js", function() {
-      if ((typeof google === 'undefined') || (typeof google.visualization === 'undefined'))
+      if ((typeof google === 'undefined') || (typeof google.visualization === 'undefined')) 
       {
          google.charts.load('current', {'packages':['corechart']});
       }
 
       google.charts.setOnLoadCallback(drawChart_netease_______________);
     });
-
+    
     function drawChart_netease_______________() {
-        var dataArr = [['Comment-numbers', 'I Took A Pill In Ibiza (SeeB Remix)', 'Let Her Go (DOAN Remix)', 'Solo Dance', 'All We Know', 'Inside Out', 'Dear Boy (Avicii by Avicii)', 'Say My Name (Kids Want Techno Remix)', 'Vagrant', 'Seve', 'Ellie', 'Shades Of Grey (DFLV Remix)', 'Forgettable', 'Weekend', 'Shine (Matoma Remix)', 'Wake', 'All I See', 'The Ocean (Radio Edit)', 'One Of Us', 'Heaven (Original Mix)', 'Heaven (Kiso Remix)', 'Paris', 'Ghost (Lost Kings Remix)', 'Pretty Young Money', 'Better Place (Raspo Remix)', 'Song For The Rich (Bearson Remix)'], ['Song-name', 13558, 2304, 16472, 18502, 2387, 3034, 1585, 10678, 82963, 6707, 4932, 23449, 3214, 1045, 66513, 1345, 29088, 405, 1221, 2277, 14536, 6349, 102, 79, 524]];
+        var dataArr = [['Comment-numbers', 'Inside Out', 'Dear Boy (Avicii by Avicii)', 'Say My Name (Kids Want Techno Remix)', 'Vagrant', 'Seve', 'Ellie', 'Shades Of Grey (DFLV Remix)', 'Forgettable', 'Weekend', 'Shine (Matoma Remix)', 'Wake', 'All I See', 'The Ocean (Radio Edit)', 'One Of Us', 'Heaven (Original Mix)', 'Heaven (Kiso Remix)', 'Paris', 'Ghost (Lost Kings Remix)', 'Pretty Young Money', 'Better Place (Raspo Remix)', 'Song For The Rich (Bearson Remix)', 'Sing Me To Sleep (Raspo Remix)', 'Waves', 'Miracle In The Middle Of My Heart (Original Mix)', "Don't You Worry Child (Charming Horses Remix Edit)", "Don't You Worry Child (Charming Horses Remix)", 'Rather Be', 'Let Her Go (Soco Remix)', 'Goodbye (Drop Tower Remix)', 'Fade (The Next Episode Remix)'], ['Song-name', 2420, 3051, 1589, 10855, 84269, 23735, 3230, 5015, 6750, 1354, 1048, 67291, 430, 2316, 29750, 14662, 1226, 6381, 80, 309, 525, 102, 10903, 1802, 251, 1469, 34078, 780, 413, 3633]];
         var grTitle = 'netease歌曲评论图';
-        var height = 1000;
+        var height = 600;
         var width = 1000;
         var logScaleFlag = false;
         var vAxisTitle = '';
@@ -38,7 +38,7 @@
             titleTextStyle: { fontSize: 18, bold: true },
             hAxis: { title: dataArr[0][0] },
             vAxis: vAxisOpt,
-
+            
         };
 
         var data = new google.visualization.DataTable();

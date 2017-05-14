@@ -1,17 +1,17 @@
 #!/usr/bin/env python
-#coding: utf-8
+# coding: utf-8
 
 import wordcloud
 from PIL import Image
 import string
 import random
 import re
-import musicc
+import music_name
 
 def show(some):
     img = Image.open(r'/home/wothard/neteasefloat/some.jpg')
     iwidth, iheight = img.size
-    #创建词云图布局
+    # 创建词云图布局
     wc = wordcloud.WordCloud(
     r'/home/wothard/neteasefloat/cabin-sketch-v1.02/CabinSketch-Bold.ttf',
     width=iwidth, height=iheight,
@@ -20,7 +20,7 @@ def show(some):
     random_state=False,
     prefer_horizontal=.9
     )
-    #创建且显示词云图
+    # 创建且显示词云图
     png = wc.generate(some)
     png = png.to_image()
     for i in range(iwidth):
@@ -31,10 +31,7 @@ def show(some):
                 png.putpixel((i,j), (255,255,255))
     png.save('songnamecloud.png')
 
-# sometype = string.ascii_letters + string.digits + string.punctuation
-# sometype = [''.join((random.choice(sometype) for i in range(8))) for j in range(650)]
-# sometype = ''.join(sometype)
-songstr = str(musicc.songsss).decode('string_escape')
+songstr = str(music_name.name_list).decode('string_escape')
 pattern = re.compile(r'[,\']')
 songstr = re.sub(pattern, r'', songstr)
 show(songstr)
