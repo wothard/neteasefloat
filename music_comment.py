@@ -72,8 +72,8 @@ class GetCommentNum(threading.Thread):
             'encSecKey': self.encSecKey
         }
         self.proxies = {
-            'http': 'http://111.23.10.12',
-            'https': 'https://219.153.76.70'
+            'http': 'http://121.232.144.27',
+            'https': 'https://202.120.31.132'
         }
     def run(self):
         while True:
@@ -86,13 +86,13 @@ class GetCommentNum(threading.Thread):
             # print self.name + "get it completed! @_@"
     def getcomment(self, url):
         # 获取歌曲评论数
-        req = requests.post(url, headers=self.headers, data=self.data, proxies=self.proxies)
+        req = requests.post(url, headers=self.headers, data=self.data)
         comment_list.append(req.json()['total'])
 
 def main():
     urls = []
     cm_na.append(music_name.name_list)
-    for i in range(143):
+    for i in range(len(music_name.name_list)):
         urlo = 'http://music.163.com/weapi/v1/resource/comments/R_SO_4_' + str(music_name.id_list[i]) +'/?csrf_token='
         urls.append(urlo)
     queue = Queue.Queue()

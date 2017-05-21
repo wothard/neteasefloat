@@ -13,7 +13,9 @@ headers = {
     'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
     }
 
-play_url = 'http://music.163.com/playlist?id=128667671'
+songs_id = raw_input("请输入歌单id:")
+play_url = 'http://music.163.com/playlist?id={}'.format(int(songs_id))
+# play_url = 'http://music.163.com/playlist?id=144588495'
 
 id_list = []
 name_list = []

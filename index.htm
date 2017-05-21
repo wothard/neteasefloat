@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<style type="text/css">
+#container {
+	min-width: 320px;
+	max-width: 600px;
+	margin: 0 auto;
+}
+		</style>
+	</head>
+	<body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="../../code/highcharts.js"></script>
+<script src="../../code/highcharts-more.js"></script>
+<script src="../../code/modules/exporting.js"></script>
+
+<div id="container"></div>
+<button id="plain">Plain</button>
+<button id="inverted">Inverted</button>
+<button id="polar">Polar</button>
+
+
+		<script type="text/javascript">
+
+var chart = Highcharts.chart('container', {
+
+    title: {
+        text: 'Chart.update'
+    },
+
+    subtitle: {
+        text: 'Plain'
+    },
+
+    xAxis: {
+        categories: ['It\'s All on U', 'Never Forget You (Price &amp; Takis Remix)', 'All Time Low (Cash Cash Remix)', 'Arigato', 'So Long', 'Tokyo', 'All Night', 'XE3 (Wheathin Turn)', 'Shape Of You (Galantis Remix)', 'Galway Girl (Decoy! Remix)', 'Fractures', 'You &amp; Me', 'Petal', 'Hola (Original Mix)', 'Middle Of The Night', 'Starship', 'Silver City', 'Alone (Extended Mix)', 'Where I\'ll Be Waiting (VIP Mix)', 'Scared To Be Lonely']
+    },
+
+    series: [{
+        type: 'column',
+        colorByPoint: true,
+        data: [135, 402, 1093, 2192, 1529, 572, 1879, 307, 3870, 663, 3283, 2652, 121, 137, 1252, 443, 7456, 583, 6544, 146],
+        showInLegend: false
+    }]
+
+});
+
+
+$('#plain').click(function () {
+    chart.update({
+        chart: {
+            inverted: false,
+            polar: false
+        },
+        subtitle: {
+            text: 'Plain'
+        }
+    });
+});
+
+$('#inverted').click(function () {
+    chart.update({
+        chart: {
+            inverted: true,
+            polar: false
+        },
+        subtitle: {
+            text: 'Inverted'
+        }
+    });
+});
+
+$('#polar').click(function () {
+    chart.update({
+        chart: {
+            inverted: false,
+            polar: true
+        },
+        subtitle: {
+            text: 'Polar'
+        }
+    });
+});
+
+		</script>
+	</body>
+</html>

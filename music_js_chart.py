@@ -2,29 +2,54 @@
 # coding: utf-8
 
 import MySQLdb
-from gpcharts import figure
-import uniout
-
-# 获取图像对象并设置x, y的值
-fig3 = figure()
-songs_list = []
-comments_list = []
+import re
+# import uniout
 
 db = MySQLdb.connect("localhost", "root", "ip16292132z", "netfloat", charset='utf8')
 cursor = db.cursor()
-sql_value = "SELECT * FROM NETFLOATCT "
-try:
-    cursor.execute(sql_value)
-    results = cursor.fetchall()
-    for i in range(len(results)):
-        songs_list.append((results[i][0].encode('utf-8')))
-        comments_list.append(int(results[i][1]))
-except:
-    print "Error : unable to fetch data!"
-db.close()
-input = int(raw_input("目前有143，选择从第几首查看（每次查看25首）：")) - 1
-xVals = ['Comment-numbers', 'Song-name']
-yVals = [songs_list[input:30 + input], comments_list[input:30 + input]]
-fig3.title = 'netease歌曲评论图'
-fig3.ylabel = ''
-fig3.bar(xVals, yVals)
+
+for i in range(10):
+	songs_list = []
+	comments_list = []
+	sql_value = "SELECT * FROM NETFLOATCT{} ".format(i)
+	print sql_value
+	try:
+		print "ddd"
+		cursor.execute(sql_value)
+		results = cursor.fetchall()
+		for i in range(len(results)):
+			songs_list.append((results[i][0].encode('utf-8')))
+			comments_list.append(int(results[i][1]))
+
+	except:
+	    print "Error : unable to fetch data!"
+
+song_string = '['
+comment_string = '['
+
+# 检查歌曲是否有单引号
+intro = "'"
+# 将列表转化为字符串，
+for i in range(19):
+    # 检查歌曲是否有单引号
+    if intro in songs_list[i]:
+        pattern_intro = re.compile(r'\'')
+        songs_list[i] = re.sub(pattern=pattern_intro, repl="\\'", string=songs_list[i])
+    song_string += "'" + songs_list[i] + "'" + ", "
+song_string += "'" + songs_list[19] + "'" + "]"
+# 评论部分
+for i in range(19):
+    comment_string += str(comments_list[i]) + ", "
+comment_string += str(comments_list[19]) + "]"
+
+# 每次运行修改数据
+song_name_data = re.compile(r'\[\'(.*?)\]')
+song_comment_data = re.compile(r'\[\d(.*?)\]')
+
+with open('index.htm', 'r') as f:
+    html_content = f.read()
+    changed_first = re.sub(pattern=song_name_data, repl=song_string, string=html_content)
+    changed_last = re.sub(pattern=song_comment_data, repl=comment_string, string=changed_first)
+
+with open('index.htm', 'w+')  as f2:
+    f2.write(changed_last)
