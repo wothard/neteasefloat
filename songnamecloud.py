@@ -9,7 +9,7 @@ import re
 import music_name
 
 def show(some):
-    img = Image.open(r'/home/wothard/neteasefloat/some.jpg')
+    img = Image.open(r'data_file/some.jpg')
     iwidth, iheight = img.size
     # 创建词云图布局
     wc = wordcloud.WordCloud(
@@ -29,7 +29,7 @@ def show(some):
             if img.getpixel((i,j))[:3] == (0,0,0):
                 # putpixel第二个值决定词云图背景色的颜色
                 png.putpixel((i,j), (255,255,255))
-    png.save('songnamecloud.png')
+    png.save(r'data_file/songnamecloud.png')
 
 songstr = str(music_name.name_list).decode('string_escape')
 pattern = re.compile(r'[,\']')

@@ -46,10 +46,10 @@ comment_string += str(comments_list[19]) + "]"
 song_name_data = re.compile(r'\[\'(.*?)\]')
 song_comment_data = re.compile(r'\[\d(.*?)\]')
 
-with open('index.htm', 'r') as f:
+with open(r'data_file/index.htm', 'r') as f:
     html_content = f.read()
     changed_first = re.sub(pattern=song_name_data, repl=song_string, string=html_content)
     changed_last = re.sub(pattern=song_comment_data, repl=comment_string, string=changed_first)
 
-with open('index.htm', 'w+')  as f2:
+with open(r'data_file/index.htm', 'w+')  as f2:
     f2.write(changed_last)
