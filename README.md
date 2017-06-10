@@ -26,7 +26,7 @@
 
 **03-21更新**  
 加入词云脚本，效果对比：：    
-！[cloud](some.jpg) ![cloud2](songnamecloud.png)
+！[cloud](data_file/some.jpg) ![cloud2](data_file/songnamecloud.png)
 **03-20更新说明了**  
 需要用到的第三方库  
 @：  
@@ -35,4 +35,4 @@
 **Crypto** 说明: 一个python加密工具包，网易云对音乐的评论进行了加密处理，需要用到ASE。  
 **其他base64,hashlib,requests不一一说明**  
 **03-19更新截图了**
-![float](float.png "test")
+![float](data_file/float.png "test")
