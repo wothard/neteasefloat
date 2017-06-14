@@ -1,4 +1,9 @@
 # neteasefloat
+**06-14更新**
+
+爬取歌单播放量
+![colum](data_file/music_hot_cato.png)
+
 **06-04更新**
 
 地图炮完成 。。。。。。。。。。。。。。。。。
