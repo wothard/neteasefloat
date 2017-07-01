@@ -11,7 +11,7 @@ import pygal
 province = []
 injuries = []
 class GetAllcolum(threading.Thread):
-    """get all colum"""
+    """获取分类标签的所有歌单"""
     def __init__(self, queue):
         threading.Thread.__init__(self)
         self.queue = queue
@@ -30,13 +30,8 @@ class GetAllcolum(threading.Thread):
         req = requests.get(url, headers=self.headers).content
         filter_colum_name = re.compile(r'<a title="(.*?)class="msk"></a>')
         filter_play_number = re.compile(r'<span class="nb">(.*?)</span>')
-        # filter_id = re.compile(r'id=(\d+)')
-        # filter_user_name = re.compile(r'fc-3">(.*?)</a>')
-        # filter_user_id = re.compile(r'home\?id=(\d+)')
         result0 = filter_colum_name.findall(req)
         result1 = filter_play_number.findall(req)
-        # result2 = filter_user_name.findall(req)
-        # result3 = filter_user_id.findall(req)
         for i in range(len(result1)):
             colum_name = result0[i].split('\"')
             colum_name = str(colum_name[0]).decode('string_escape')
@@ -66,6 +61,7 @@ def main():
         t.setDaemon(True)
         t.start()
     queue.join()
+    # 制作成条形图（svg格式）
     line_chart = pygal.HorizontalBar()
     line_chart.title = u"网易云 "
     for i in range(len(injuries)):

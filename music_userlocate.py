@@ -14,6 +14,7 @@ import re
 from bs4 import BeautifulSoup
 
 class TheKey(object):
+    """用于解析评论动态加载的加密"""
     def __init__(self):
         self.nonce = "0CoJUm6Qyw8W8jud"
         self.nonce2 = 16 * 'F'
@@ -28,6 +29,7 @@ class TheKey(object):
         encrypt_text = base64.b64encode(encrypt_text)
         return encrypt_text
     def page_params(self,page):
+        '''判断多页评论，和多页评论的解析'''
         if page == 1:
             text = '{rid:"", offset:"0", total:"true", limit:"20", csrf_token:""}'
             enText = self.aesEncrypt(text, self.nonce, self.encry_number)
@@ -45,6 +47,7 @@ user_info_nickname = []
 user_info_locate = []
 
 class GetUserInfo(object):
+    """获取在评论页提供的用户信息"""
     def __init__(self):
         self.headers = {
             'Host':"music.163.com",
@@ -65,9 +68,10 @@ class GetUserInfo(object):
             "params": params,
             "encSecKey": encSecKey
         }
-        response = requests.post(url, headers=self.headers, data=data,proxies = self.proxies)
+        response = requests.post(url, headers=self.headers, data=data,proxies=self.proxies)
         return response.content
     def getuserinfo(self, url):
+        '''获取评论页的用户名和评论'''
         params = thekey.page_params(1)
         encSecKey = self.encSecKey
         json_text = self.getjson(url,params,encSecKey)
@@ -97,6 +101,8 @@ class GetUserInfo(object):
             print("第%d页抓取完毕!" % (i+1))
 
 class GetUserLocatetion(threading.Thread):
+    """因为用户所在地在评论没有提供，只能去用户页面获取。
+    因为从评论中可以获得所有用户id，所以直接使用多线程获取"""
     def __init__(self, queue):
         threading.Thread.__init__(self)
         self.queue = queue
@@ -114,18 +120,18 @@ class GetUserLocatetion(threading.Thread):
     def getlocatetion(self, url):
         req = re.compile(r'<span>(.*?)</span>')
         s = requests.session()
-        s = BeautifulSoup(s.get(url,headers = self.headers).content, "lxml")
+        s = BeautifulSoup(s.get(url,headers=self.headers).content, "lxml")
         result = req.findall(str(s))
         if result[3] == '':
             result[3] = "None"
         user_info_locate.append(result[3])
         # print result[3]
 
-input_song_id = raw_input("请输入歌曲id： ")
-song_url = "http://music.163.com/weapi/v1/resource/comments/R_SO_4_" + input_song_id + "/?csrf_token="
-
 def id_request():
+    """主函数和定义线程数"""
     get = GetUserInfo()
+    input_song_id = raw_input("请输入歌曲id： ")
+    song_url = "http://music.163.com/weapi/v1/resource/comments/R_SO_4_" + input_song_id + "/?csrf_token="
     get.getuserinfo(song_url)
     urls = []
     for i in user_info_id:
@@ -140,4 +146,5 @@ def id_request():
         t.setDaemon(True)
         t.start()
     queue.join()
+
 # id_request()

@@ -108,3 +108,4 @@ if __name__ == '__main__':
     st = time.clock()
     main()
     sd = (time.clock() - st)
+    print sd
